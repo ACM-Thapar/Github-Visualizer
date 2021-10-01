@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 flask = "*"
+requests = "*"
+html5lib = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 
