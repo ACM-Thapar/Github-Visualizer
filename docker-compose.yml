@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  githubvisualizer:
+    image: githubvisualizer
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "5000:5000"
