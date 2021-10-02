@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Welcome to the Github Visualizer\nUser Basic Stats: http://localhost/<username>\nDay-to-Day trends: http://localhost/<username>/trends"
+    return "Welcome to the Github Visualizer"
 
 @app.route("/<username>")
 def user(username):
