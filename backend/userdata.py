@@ -33,7 +33,7 @@ class UserData:
             "github_link": self.github_link,
             "number_gists": self.number_gists,
             "number_of_commits": self.totalContributions,
-            "trends": self.trends
+            #"trends": self.trends
         }
 
 def get_image(username):
