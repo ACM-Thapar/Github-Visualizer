@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Welcome to the Github Visualizer"
+    return "Welcome to the Github Visualizer\nUser Basic Stats: http://localhost/<username>\nDay-to-Day trends: http://localhost/<username>/trends"
 
 @app.route("/<username>")
 def user(username):
@@ -20,7 +20,7 @@ def trends(username):
     # check if the user is not an organization
     if check_if_org(username):
         return {"message": "organization not supported"}
-        
+
     # return json with details
     try:
         data = getTrends(username)
