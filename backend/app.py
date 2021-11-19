@@ -27,3 +27,19 @@ def trends(username):
         return jsonify(data)
     except:
         return {"message": "username not found"}
+
+@app.route("/<username>/streak")
+def streak(username):
+    # check if the user is not an organization
+    if check_if_org(username):
+        return {"message": "organization not supported"}
+    
+    # return json with details
+    try:
+        data = getLongestStreakContributions(username)
+        return jsonify(data)
+    except:
+        return {"message": "username not found"}
+
+if __name__ == "__main__":
+    app.run(debug=True)

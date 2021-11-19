@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
+import datetime
 # get data from github profile
 
 class UserData:
@@ -128,5 +129,35 @@ def getTrends(username):
             # get the number of commits
             if activity["data-count"] != "0":
                 # add to the dictionary
-                commit_trends.append({"date": date, "activity": activity["data-count"]})
+                commit_trends.append({"date": date, "activity": int(activity["data-count"])})
     return commit_trends
+
+def getLongestStreakContributions(username):
+    trends = getTrends(username)
+    
+    # date format is YYYY-MM-DD
+    # get the longest streak
+    current_date = None
+    longest_streak = {}
+    date_range = []
+    for trend in trends:
+        if current_date == None:
+            current_date = trend["date"]
+            date_range.append({"start_date": current_date, "end_date": current_date, "count": 1, "commit_count": trend["activity"]})
+        else:
+            if trend["date"] == current_date:
+                date_range[-1]["count"] += 1
+                date_range[-1]["end_date"] = trend["date"]
+                date_range[-1]["commit_count"] += trend["activity"]
+            else:
+                current_date = trend["date"]
+                date_range.append({"start_date": current_date, "end_date": current_date, "count": 1, "commit_count": trend["activity"]})
+
+            # increment the current_date
+            current_date = datetime.datetime.strptime(current_date, "%Y-%m-%d")
+            current_date = current_date + datetime.timedelta(days=1)
+            current_date = current_date.strftime("%Y-%m-%d")
+    
+    # get the max count dictionary
+    max_count = max(date_range, key=lambda x: x["count"])
+    return max_count
