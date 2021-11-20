@@ -119,7 +119,7 @@ def getTrends(username):
     html = urlopen(url)
     soup = BeautifulSoup(html, "html.parser")
 
-    commit_trends =  []
+    non_commit_trends =  []
     commit_activity = soup.find_all("rect", class_="ContributionCalendar-day")
     for activity in commit_activity:
         # check those tags if they have data-date in them else ignore
@@ -129,8 +129,26 @@ def getTrends(username):
             # get the number of commits
             if activity["data-count"] != "0":
                 # add to the dictionary
-                commit_trends.append({"date": date, "activity": int(activity["data-count"])})
-    return commit_trends
+                non_commit_trends.append({"date": date, "activity": int(activity["data-count"])})
+    return non_commit_trends
+
+def getNonWorkTrends(username):
+    url = "https://github.com/" + username
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+
+    non_commit_trends =  []
+    commit_activity = soup.find_all("rect", class_="ContributionCalendar-day")
+    for activity in commit_activity:
+        # check those tags if they have data-date in them else ignore
+        if "data-date" in str(activity) and "data-count" in str(activity):
+            # get the date
+            date = activity["data-date"]
+            # get the number of commits
+            if activity["data-count"] == "0":
+                # add to the dictionary
+                non_commit_trends.append(date)
+    return non_commit_trends
 
 def getLongestStreakContributions(username):
     trends = getTrends(username)
@@ -163,29 +181,28 @@ def getLongestStreakContributions(username):
     return max_count
 
 def getLazyGap(username):
-    trends = getTrends(username)
-    lazy_gap = []
-    for trend in trends:
-        # compare two consecutive dates
-        first_date = trend["date"]
-        # next date after the first date
-        try:
-            second_date = trends[trends.index(trend) + 1]["date"]
-        except:
-            break
+    non_commit_trends = getNonWorkTrends(username)
+    # get the longest streak
+    current_date = None
+    longest_streak = {}
+    date_range = []
+    for trend in non_commit_trends:
+        if current_date == None:
+            current_date = trend
+            date_range.append({"start_date": current_date, "end_date": current_date, "gap": 1})
+        else:
+            if trend == current_date:
+                date_range[-1]["gap"] += 1
+                date_range[-1]["end_date"] = trend
+            else:
+                current_date = trend
+                date_range.append({"start_date": current_date, "end_date": current_date, "gap": 1})
 
-        # get the number of days between the two dates
-        first_date = datetime.datetime.strptime(first_date, "%Y-%m-%d")
-        second_date = datetime.datetime.strptime(second_date, "%Y-%m-%d")
-        gap = (second_date - first_date).days
-
-        # increment day to next
-        first_date = first_date + datetime.timedelta(days=1)
-        second_date = second_date - datetime.timedelta(days=1)
-        try:
-            lazy_gap.append({"start_date": first_date.strftime("%Y-%m-%d"), "end_date": second_date.strftime("%Y-%m-%d"),"gap": gap-1})
-        except:
-            pass
-    # get the max count dictionary
-    max_count = max(lazy_gap, key=lambda x: x["gap"])
+            # increment the current_date
+            current_date = datetime.datetime.strptime(current_date, "%Y-%m-%d")
+            current_date = current_date + datetime.timedelta(days=1)
+            current_date = current_date.strftime("%Y-%m-%d")
+    # get max
+    max_count = max(date_range, key=lambda x: x["gap"])
+    print(max_count)
     return max_count
