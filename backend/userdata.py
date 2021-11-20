@@ -161,3 +161,31 @@ def getLongestStreakContributions(username):
     # get the max count dictionary
     max_count = max(date_range, key=lambda x: x["count"])
     return max_count
+
+def getLazyGap(username):
+    trends = getTrends(username)
+    lazy_gap = []
+    for trend in trends:
+        # compare two consecutive dates
+        first_date = trend["date"]
+        # next date after the first date
+        try:
+            second_date = trends[trends.index(trend) + 1]["date"]
+        except:
+            break
+
+        # get the number of days between the two dates
+        first_date = datetime.datetime.strptime(first_date, "%Y-%m-%d")
+        second_date = datetime.datetime.strptime(second_date, "%Y-%m-%d")
+        gap = (second_date - first_date).days
+
+        # increment day to next
+        first_date = first_date + datetime.timedelta(days=1)
+        second_date = second_date - datetime.timedelta(days=1)
+        try:
+            lazy_gap.append({"start_date": first_date.strftime("%Y-%m-%d"), "end_date": second_date.strftime("%Y-%m-%d"),"gap": gap-1})
+        except:
+            pass
+    # get the max count dictionary
+    max_count = max(lazy_gap, key=lambda x: x["gap"])
+    return max_count
