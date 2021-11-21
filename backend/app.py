@@ -53,6 +53,30 @@ def lazygap(username):
         return jsonify(data)
     except:
         return {"message": "username not found"}
+@app.route("/<username>/trends/month")
+def trends_month(username):
+    # check if the user is not an organization
+    if check_if_org(username):
+        return {"message": "organization not supported"}
+    
+    # return json with details
+    try:
+        data = monthDistribution(username)
+        return jsonify(data)
+    except:
+        return {"message": "username not found"}
+@app.route("/<username>/trends/day")
+def trends_day(username):
+    # check if the user is not an organization
+    if check_if_org(username):
+        return {"message": "organization not supported"}
+    
+    # return json with details
+    try:
+        data = dayDistribution(username)
+        return jsonify(data)
+    except:
+        return {"message": "username not found"}
 
 if __name__ == "__main__":
     app.run(debug=True)

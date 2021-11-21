@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import datetime
+import calendar
 # get data from github profile
 
 class UserData:
@@ -206,3 +207,78 @@ def getLazyGap(username):
     max_count = max(date_range, key=lambda x: x["gap"])
     print(max_count)
     return max_count
+
+def monthDistribution(username):
+    trends = getTrends(username)
+    months = {"01": "January", "02": "February", "03": "March", "04": "April", "05": "May", "06": "June", "07": "July", "08": "August", "09": "September", "10": "October", "11": "November", "12": "December"}
+    distribution = []
+    """
+    [
+        {
+            "month": "January",
+            "commit_count": 0,
+            "days": 0
+        }
+    ]
+    """
+    month_list = []
+    for trend in trends:
+        # get current year
+        current_year = datetime.date.today().strftime("%Y")
+
+        # make sure its the current year trend only
+        if trend["date"].split("-")[0] != current_year:
+            continue
+        # get the month
+        month = trend["date"].split("-")[1]
+        # get the commit count
+        commit_count = trend["activity"]
+        # check if month is in the list
+        if month not in month_list:
+            month_list.append(month)
+            distribution.append({"month": months[month], "commit_count": commit_count, "days": 1})
+        else:
+            # get the index of the month
+            index = month_list.index(month)
+            # increment the commit count
+            distribution[index]["commit_count"] += commit_count
+            distribution[index]["days"] += 1
+    return distribution
+
+def getDay(date):
+    day = datetime.datetime.strptime(date, "%Y-%m-%d").weekday()
+    return (calendar.day_name[day])
+
+def dayDistribution(username):
+    trends = getTrends(username)
+    distribution = []
+    """
+    [
+        {
+            "day": "Monday",
+            "commit_count": 0,
+            "days": 0
+        }
+    ]
+    """
+    day_list = []
+    for trend in trends:
+        day = getDay(trend["date"])
+        # get current year
+        current_year = datetime.date.today().strftime("%Y")
+
+        # make sure its the current year trend only
+        if trend["date"].split("-")[0] != current_year:
+            continue
+        
+        # check if day is in the list
+        if day not in day_list:
+            day_list.append(day)
+            distribution.append({"day": day, "commit_count": trend["activity"], "frequency": 1})
+        else:
+            # get the index of the day
+            index = day_list.index(day)
+            # increment the commit count
+            distribution[index]["commit_count"] += trend["activity"]
+            distribution[index]["frequency"] += 1
+    return distribution
