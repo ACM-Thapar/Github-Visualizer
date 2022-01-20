@@ -6,7 +6,7 @@ app = Flask(__name__)
 def index():
     return "Welcome to the Github Visualizer"
 
-@app.route("/<username>")
+@app.route("/<username>/")
 def user(username):
     # return json with details
     try:
@@ -15,7 +15,7 @@ def user(username):
     except:
         return {"message": "username not found"}
 
-@app.route("/<username>/trends")
+@app.route("/<username>/trends/")
 def trends(username):
     # check if the user is not an organization
     if check_if_org(username):
@@ -28,7 +28,7 @@ def trends(username):
     except:
         return {"message": "username not found"}
 
-@app.route("/<username>/streak")
+@app.route("/<username>/streak/")
 def streak(username):
     # check if the user is not an organization
     if check_if_org(username):
@@ -41,7 +41,7 @@ def streak(username):
     except:
         return {"message": "username not found"}
 
-@app.route("/<username>/lazygap")
+@app.route("/<username>/lazygap/")
 def lazygap(username):
     # check if the user is not an organization
     if check_if_org(username):
@@ -53,7 +53,7 @@ def lazygap(username):
         return jsonify(data)
     except:
         return {"message": "username not found"}
-@app.route("/<username>/trends/month")
+@app.route("/<username>/trends/month/")
 def trends_month(username):
     # check if the user is not an organization
     if check_if_org(username):
@@ -65,7 +65,7 @@ def trends_month(username):
         return jsonify(data)
     except:
         return {"message": "username not found"}
-@app.route("/<username>/trends/day")
+@app.route("/<username>/trends/day/")
 def trends_day(username):
     # check if the user is not an organization
     if check_if_org(username):
