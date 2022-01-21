@@ -266,10 +266,6 @@ def dayDistribution(username):
         day = getDay(trend["date"])
         # get current year
         current_year = datetime.date.today().strftime("%Y")
-
-        # make sure its the current year trend only
-        if trend["date"].split("-")[0] != current_year:
-            continue
         
         # check if day is in the list
         if day not in day_list:
@@ -282,3 +278,38 @@ def dayDistribution(username):
             distribution[index]["commit_count"] += trend["activity"]
             distribution[index]["frequency"] += 1
     return distribution
+def fave_day(username):
+    trends = getTrends(username)
+    distribution = []
+    """
+    [
+        {
+            "day": "Monday",
+            "commit_count": 0,
+            "days": 0
+        }
+    ]
+    """
+    day_list = []
+    for trend in trends:
+        day = getDay(trend["date"])
+        # get current year
+        current_year = datetime.date.today().strftime("%Y")
+        
+        # check if day is in the list
+        if day not in day_list:
+            day_list.append(day)
+            distribution.append({"day": day, "commit_count": trend["activity"], "frequency": 1})
+        else:
+            # get the index of the day
+            index = day_list.index(day)
+            # increment the commit count
+            distribution[index]["commit_count"] += trend["activity"]
+            distribution[index]["frequency"] += 1
+    max_day=max(distribution, key=lambda x: x["commit_count"])
+    return max_day
+def best_day(username):
+    trends = getTrends(username)
+    
+    max_day = max(trends, key=lambda x: x["activity"])
+    return max_day
