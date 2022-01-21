@@ -90,5 +90,17 @@ def trends_fave_day(username):
         return jsonify(data)
     except:
         return {"message": "username not found"}
+@app.route("/<username>/trends/bestday/")
+def trends_bestday(username):
+    # check if the user is not an organization
+    if check_if_org(username):
+        return {"message": "organization not supported"}
+    
+    # return json with details
+    try:
+        data = best_day(username)
+        return jsonify(data)
+    except:
+        return {"message": "username not found"}
 if __name__ == "__main__":
     app.run(debug=True)

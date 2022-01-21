@@ -308,3 +308,8 @@ def fave_day(username):
             distribution[index]["frequency"] += 1
     max_day=max(distribution, key=lambda x: x["commit_count"])
     return max_day
+def best_day(username):
+    trends = getTrends(username)
+    
+    max_day = max(trends, key=lambda x: x["activity"])
+    return max_day
