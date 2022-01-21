@@ -331,3 +331,15 @@ def commits_in_a_month(username):
     private_commits = [x.strip() for x in private_commits][1]
 
     print(username, open_commits, " commits in public repositories and", private_commits, " commits in private repositories")
+
+def commits_in_a_year(username):
+    year = input("Enter the year: ")
+    url = "https://github.com/" + username + "?tab=overview&from=" + year + "-12-01" + "&to=" + year + "-12-31"
+
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+
+    total_commits = soup.find_all(class_="f4 text-normal mb-2")[0].get_text()
+    total_commits = total_commits.split("\n")
+    total_commits = [x.strip() for x in total_commits][1]
+    print("Total commits in the year ",year,"by ", username, " are ", total_commits)
