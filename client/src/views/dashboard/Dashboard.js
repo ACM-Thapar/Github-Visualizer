@@ -1,5 +1,13 @@
 import React, { lazy } from 'react'
-
+import { DocsCallout } from '../../components'
+import {
+  CChartBar,
+  CChartDoughnut,
+  CChartLine,
+  CChartPie,
+  CChartPolarArea,
+  CChartRadar,
+} from '@coreui/react-chartjs'
 import {
   CAvatar,
   CButton,
@@ -18,7 +26,7 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
-import { CChartLine } from '@coreui/react-chartjs'
+// import { CChartLine } from '@coreui/react-chartjs'
 import { getStyle, hexToRgba } from '@coreui/utils'
 import CIcon from '@coreui/icons-react'
 import {
@@ -188,9 +196,9 @@ const Dashboard = () => {
           <CRow>
             <CCol sm={5}>
               <h4 id="traffic" className="card-title mb-0">
-                Traffic
+                Contributions
               </h4>
-              <div className="small text-medium-emphasis">January - July 2021</div>
+              <div className="small text-medium-emphasis">2021 & 2022</div>
             </CCol>
             <CCol sm={7} className="d-none d-md-block">
               <CButton color="primary" className="float-end">
@@ -213,7 +221,7 @@ const Dashboard = () => {
           <CChartLine
             style={{ height: '300px', marginTop: '40px' }}
             data={{
-              labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+              labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September','October','November', 'December'],
               datasets: [
                 {
                   label: 'My First dataset',
@@ -222,6 +230,12 @@ const Dashboard = () => {
                   pointHoverBackgroundColor: getStyle('--cui-info'),
                   borderWidth: 2,
                   data: [
+                    random(50, 200),
+                    random(50, 200),
+                    random(50, 200),
+                    random(50, 200),
+                    random(50, 200),
+                    random(50, 200),
                     random(50, 200),
                     random(50, 200),
                     random(50, 200),
@@ -246,6 +260,12 @@ const Dashboard = () => {
                     random(50, 200),
                     random(50, 200),
                     random(50, 200),
+                    random(50, 200),
+                    random(50, 200),
+                    random(50, 200),
+                    random(50, 200),
+                    random(50, 200),
+                    random(50, 200),
                   ],
                 },
                 {
@@ -255,7 +275,7 @@ const Dashboard = () => {
                   pointHoverBackgroundColor: getStyle('--cui-danger'),
                   borderWidth: 1,
                   borderDash: [8, 5],
-                  data: [65, 65, 65, 65, 65, 65, 65],
+                  data: [65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65],
                 },
               ],
             }}
@@ -309,6 +329,162 @@ const Dashboard = () => {
           </CRow>
         </CCardFooter>
       </CCard>
+      <CRow>
+      <CCol xs={12}>
+        {/* <DocsCallout
+          name="Chart"
+          href="components/chart"
+          content="React wrapper component for Chart.js 3.0, the most popular charting library."
+        /> */}
+      </CCol>
+      <CCol xs={6}>
+        <CCard className="mb-4">
+          <CCardHeader>Bar Chart</CCardHeader>
+          <CCardBody>
+            <CChartBar
+              data={{
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [
+                  {
+                    label: 'GitHub Commits',
+                    backgroundColor: '#f87979',
+                    data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
+                  },
+                ],
+              }}
+              labels="months"
+            />
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol xs={6}>
+        <CCard className="mb-4">
+          <CCardHeader>Line Chart</CCardHeader>
+          <CCardBody>
+            <CChartLine
+              data={{
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [
+                  {
+                    label: 'My First dataset',
+                    backgroundColor: 'rgba(220, 220, 220, 0.2)',
+                    borderColor: 'rgba(220, 220, 220, 1)',
+                    pointBackgroundColor: 'rgba(220, 220, 220, 1)',
+                    pointBorderColor: '#fff',
+                    data: [random(50,200), random(50,200), random(50,200), random(50,200), random(50,200), random(50,200), random(50,200)],
+                  },
+                  {
+                    label: 'My Second dataset',
+                    backgroundColor: 'rgba(151, 187, 205, 0.2)',
+                    borderColor: 'rgba(151, 187, 205, 1)',
+                    pointBackgroundColor: 'rgba(151, 187, 205, 1)',
+                    pointBorderColor: '#fff',
+                    data: [random(50,200), random(50,200), random(50,200), random(50,200), random(50,200), random(50,200), random(50,200)],
+                  },
+                ],
+              }}
+            />
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol xs={6}>
+        <CCard className="mb-4">
+          <CCardHeader>Doughnut Chart</CCardHeader>
+          <CCardBody>
+            <CChartDoughnut
+              data={{
+                labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+                datasets: [
+                  {
+                    backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+                    data: [40, 20, 80, 10],
+                  },
+                ],
+              }}
+            />
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol xs={6}>
+        <CCard className="mb-4">
+          <CCardHeader>Pie Chart</CCardHeader>
+          <CCardBody>
+            <CChartPie
+              data={{
+                labels: ['Red', 'Green', 'Yellow'],
+                datasets: [
+                  {
+                    data: [300, 50, 100],
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                  },
+                ],
+              }}
+            />
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol xs={6}>
+        <CCard className="mb-4">
+          <CCardHeader>Polar Area Chart</CCardHeader>
+          <CCardBody>
+            <CChartPolarArea
+              data={{
+                labels: ['Red', 'Green', 'Yellow', 'Grey', 'Blue'],
+                datasets: [
+                  {
+                    data: [11, 16, 7, 3, 14],
+                    backgroundColor: ['#FF6384', '#4BC0C0', '#FFCE56', '#E7E9ED', '#36A2EB'],
+                  },
+                ],
+              }}
+            />
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol xs={6}>
+        <CCard className="mb-4">
+          <CCardHeader>Radar Chart</CCardHeader>
+          <CCardBody>
+            <CChartRadar
+              data={{
+                labels: [
+                  'Eating',
+                  'Drinking',
+                  'Sleeping',
+                  'Designing',
+                  'Coding',
+                  'Cycling',
+                  'Running',
+                ],
+                datasets: [
+                  {
+                    label: 'My First dataset',
+                    backgroundColor: 'rgba(220, 220, 220, 0.2)',
+                    borderColor: 'rgba(220, 220, 220, 1)',
+                    pointBackgroundColor: 'rgba(220, 220, 220, 1)',
+                    pointBorderColor: '#fff',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(220, 220, 220, 1)',
+                    data: [65, 59, 90, 81, 56, 55, 40],
+                  },
+                  {
+                    label: 'My Second dataset',
+                    backgroundColor: 'rgba(151, 187, 205, 0.2)',
+                    borderColor: 'rgba(151, 187, 205, 1)',
+                    pointBackgroundColor: 'rgba(151, 187, 205, 1)',
+                    pointBorderColor: '#fff',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(151, 187, 205, 1)',
+                    data: [28, 48, 40, 19, 96, 27, 100],
+                  },
+                ],
+              }}
+            />
+          </CCardBody>
+        </CCard>
+      </CCol>
+    </CRow>
 
       <WidgetsBrand withCharts />
 
