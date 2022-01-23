@@ -3,104 +3,91 @@ from userdata import *
 app = Flask(__name__)
 
 @app.route("/")
-def index():
-    return "Welcome to the Github Visualizer"
-
-@app.route("/<username>/")
-def user(username):
-    # return json with details
+def index(username):
+        # return json with details
     try:
-        data = getData(username)
-        return jsonify(data)
+        user_data = getData(username)
+        user =  jsonify(user_data)
     except:
-        return {"message": "username not found"}
+        user = {"message": "username not found"}
 
-@app.route("/<username>/trends/")
-def trends(username):
-    # check if the user is not an organization
+        # check if the user is not an organization
     if check_if_org(username):
-        return {"message": "organization not supported"}
+        trends = {"message": "organization not supported"}
 
     # return json with details
     try:
-        data = getTrends(username)
-        return jsonify(data)
+        trends_data = getTrends(username)
+        trends = jsonify(trends_data)
     except:
-        return {"message": "username not found"}
+        trends = {"message": "username not found"}
 
-@app.route("/<username>/streak/")
-def streak(username):
-    # check if the user is not an organization
+        # check if the user is not an organization
+    if check_if_org(username):
+        streak = {"message": "organization not supported"}
+    
+    # return json with details
+    try:
+        streak_data = getLongestStreakContributions(username)
+        streak = jsonify(streak_data)
+    except:
+        streak = {"message": "username not found"}
+
+        # check if the user is not an organization
     if check_if_org(username):
         return {"message": "organization not supported"}
     
     # return json with details
     try:
-        data = getLongestStreakContributions(username)
-        return jsonify(data)
+        lazygap_data = getLazyGap(username)
+        lazygap = jsonify(lazygap_data)
     except:
-        return {"message": "username not found"}
+        lazygap = {"message": "username not found"}
 
-@app.route("/<username>/lazygap/")
-def lazygap(username):
-    # check if the user is not an organization
+        # check if the user is not an organization
     if check_if_org(username):
-        return {"message": "organization not supported"}
+        trend_month = {"message": "organization not supported"}
     
     # return json with details
     try:
-        data = getLazyGap(username)
-        return jsonify(data)
+        trend_month_data = monthDistribution(username)
+        trend_month = jsonify(trend_month_data)
     except:
-        return {"message": "username not found"}
-@app.route("/<username>/trends/month/")
-def trends_month(username):
-    # check if the user is not an organization
-    if check_if_org(username):
-        return {"message": "organization not supported"}
-    
-    # return json with details
-    try:
-        data = monthDistribution(username)
-        return jsonify(data)
-    except:
-        return {"message": "username not found"}
-@app.route("/<username>/trends/day/")
-def trends_day(username):
-    # check if the user is not an organization
-    if check_if_org(username):
-        return {"message": "organization not supported"}
-    
-    # return json with details
-    try:
-        data = dayDistribution(username)
-        return jsonify(data)
-    except:
-        return {"message": "username not found"}
+        trend_month = {"message": "username not found"}
 
-@app.route("/<username>/trends/fave_day/")
-def trends_fave_day(username):
     # check if the user is not an organization
     if check_if_org(username):
-        return {"message": "organization not supported"}
+        trend_day = {"message": "organization not supported"}
     
     # return json with details
     try:
-        data = fave_day(username)
-        return jsonify(data)
+        trend_day_data = dayDistribution(username)
+        trend_day = jsonify(trend_day_data)
     except:
-        return {"message": "username not found"}
-@app.route("/<username>/trends/bestday/")
-def trends_bestday(username):
+        trend_day = {"message": "username not found"}
+
     # check if the user is not an organization
     if check_if_org(username):
-        return {"message": "organization not supported"}
+        trends_fave_day = {"message": "organization not supported"}
     
     # return json with details
     try:
-        data = best_day(username)
-        return jsonify(data)
+        trends_fave_day_data = fave_day(username)
+        trends_fave_day = jsonify(trends_fave_day_data)
     except:
-        return {"message": "username not found"}
+        trends_fave_day = {"message": "username not found"}
+
+        # check if the user is not an organization
+    if check_if_org(username):
+        trends_bestday = {"message": "organization not supported"}
+    
+    # return json with details
+    try:
+        trends_bestday_data = best_day(username)
+        trends_bestday = jsonify(trends_bestday_data)
+    except:
+        trends_bestday = {"message": "username not found"}
+
+
 if __name__ == "__main__":
     app.run(debug=True)
