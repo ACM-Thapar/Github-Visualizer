@@ -1,9 +1,17 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from userdata import *
 app = Flask(__name__)
 
-@app.route("/")
-def index(username):
+username = "Samikmalhotra"
+
+@app.route("/", methods=['POST','GET'])
+def index():
+
+    content_type = request.headers.get('Content-Type')
+    if (content_type == 'application/json'):
+        json = request.json
+        username = json.username
+
         # return json with details
     try:
         user_data = getData(username)
@@ -87,6 +95,8 @@ def index(username):
         trends_bestday = jsonify(trends_bestday_data)
     except:
         trends_bestday = {"message": "username not found"}
+
+
 
 
 if __name__ == "__main__":
