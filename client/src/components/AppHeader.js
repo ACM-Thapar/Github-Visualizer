@@ -18,7 +18,7 @@ import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
 import { logo } from 'src/assets/brand/logo'
 
-const AppHeader = () => {
+const AppHeader = ({data}) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
@@ -37,7 +37,7 @@ const AppHeader = () => {
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <CNavLink to="/dashboard" component={NavLink} activeClassName="active">
-              Github Visualizer
+            {data && data[0] && data[0].username}
             </CNavLink>
           </CNavItem>
           {/* <CNavItem>
@@ -65,7 +65,7 @@ const AppHeader = () => {
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-3">
-          <AppHeaderDropdown />
+          <AppHeaderDropdown data={data} />
         </CHeaderNav>
       </CContainer>
       {/* <CHeaderDivider />
