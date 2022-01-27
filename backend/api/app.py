@@ -1,103 +1,126 @@
-from flask import Flask, jsonify, request
+
+from flask import Flask, jsonify
 from userdata import *
+from flask_cors import CORS, cross_origin
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
-username = "Samikmalhotra"
-
-@app.route("/", methods=['POST','GET'])
+@app.route("/")
 def index():
+    return "Welcome to the Github Visualizer"
 
-    content_type = request.headers.get('Content-Type')
-    if (content_type == 'application/json'):
-        json = request.json
-        username = json.username
-
-        # return json with details
-    try:
-        user_data = getData(username)
-        user =  jsonify(user_data)
-    except:
-        user = {"message": "username not found"}
-
-        # check if the user is not an organization
-    if check_if_org(username):
-        trends = {"message": "organization not supported"}
-
+@app.route("/<username>/")
+def user(username):
     # return json with details
-    try:
-        trends_data = getTrends(username)
-        trends = jsonify(trends_data)
-    except:
-        trends = {"message": "username not found"}
-
-        # check if the user is not an organization
     if check_if_org(username):
-        streak = {"message": "organization not supported"}
+        return {"message": "organization not supported"}
+
+    try:
+        data = getData(username)
+        trends = getTrends(username)
+        streak = getLongestStreakContributions(username)
+        gap = getLazyGap(username)
+        months = monthDistribution(username)
+        current_months=monthDistributionCurrentYear(username)
+        fav_day= fave_day(username)
+        bestday= best_day(username)
+
+
+        return jsonify(data, trends, streak, gap, months, current_months, fav_day, bestday)
+    except:
+        return {"message": "username not found"}
     
+
+@app.route("/<username>/trends/")
+def trends(username):
+    # check if the user is not an organization
+    if check_if_org(username):
+        return {"message": "organization not supported"}
+
     # return json with details
     try:
-        streak_data = getLongestStreakContributions(username)
-        streak = jsonify(streak_data)
+        data = getTrends(username)
+        return jsonify(data)
     except:
-        streak = {"message": "username not found"}
+        return {"message": "username not found"}
 
-        # check if the user is not an organization
+@app.route("/<username>/streak/")
+def streak(username):
+    # check if the user is not an organization
     if check_if_org(username):
         return {"message": "organization not supported"}
     
     # return json with details
     try:
-        lazygap_data = getLazyGap(username)
-        lazygap = jsonify(lazygap_data)
+        data = getLongestStreakContributions(username)
+        return jsonify(data)
     except:
-        lazygap = {"message": "username not found"}
+        return {"message": "username not found"}
 
-        # check if the user is not an organization
-    if check_if_org(username):
-        trend_month = {"message": "organization not supported"}
-    
-    # return json with details
-    try:
-        trend_month_data = monthDistribution(username)
-        trend_month = jsonify(trend_month_data)
-    except:
-        trend_month = {"message": "username not found"}
-
+@app.route("/<username>/lazygap/")
+def lazygap(username):
     # check if the user is not an organization
     if check_if_org(username):
-        trend_day = {"message": "organization not supported"}
+        return {"message": "organization not supported"}
     
     # return json with details
     try:
-        trend_day_data = dayDistribution(username)
-        trend_day = jsonify(trend_day_data)
+        data = getLazyGap(username)
+        return jsonify(data)
     except:
-        trend_day = {"message": "username not found"}
-
+        return {"message": "username not found"}
+@app.route("/<username>/trends/month/")
+def trends_month(username):
     # check if the user is not an organization
     if check_if_org(username):
-        trends_fave_day = {"message": "organization not supported"}
+        return {"message": "organization not supported"}
     
     # return json with details
     try:
-        trends_fave_day_data = fave_day(username)
-        trends_fave_day = jsonify(trends_fave_day_data)
+        data = monthDistribution(username)
+        return jsonify(data)
     except:
-        trends_fave_day = {"message": "username not found"}
-
-        # check if the user is not an organization
+        return {"message": "username not found"}
+@app.route("/<username>/trends/day/")
+def trends_day(username):
+    # check if the user is not an organization
     if check_if_org(username):
-        trends_bestday = {"message": "organization not supported"}
+        return {"message": "organization not supported"}
     
     # return json with details
     try:
-        trends_bestday_data = best_day(username)
-        trends_bestday = jsonify(trends_bestday_data)
+        data = dayDistribution(username)
+        return jsonify(data)
     except:
-        trends_bestday = {"message": "username not found"}
+        return {"message": "username not found"}
 
-
-
-
+@app.route("/<username>/trends/fave_day/")
+def trends_fave_day(username):
+    # check if the user is not an organization
+    if check_if_org(username):
+        return {"message": "organization not supported"}
+    
+    # return json with details
+    try:
+        data = fave_day(username)
+        return jsonify(data)
+    except:
+        return {"message": "username not found"}
+@app.route("/<username>/trends/bestday/")
+def trends_bestday(username):
+    # check if the user is not an organization
+    if check_if_org(username):
+        return {"message": "organization not supported"}
+    
+    # return json with details
+    try:
+        data = best_day(username)
+        return jsonify(data)
+    except:
+        return {"message": "username not found"}
 if __name__ == "__main__":
     app.run(debug=True)
+@cross_origin()
+def helloWorld():
+  return "Hello, cross-origin-world!"
