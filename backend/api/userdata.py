@@ -227,6 +227,41 @@ def monthDistribution(username):
         current_year = datetime.date.today().strftime("%Y")
 
         # make sure its the current year trend only
+        
+        # get the month
+        month = trend["date"].split("-")[1]
+        # get the commit count
+        commit_count = trend["activity"]
+        # check if month is in the list
+        if month not in month_list:
+            month_list.append(month)
+            distribution.append({"month": months[month], "commit_count": commit_count, "days": 1})
+        else:
+            # get the index of the month
+            index = month_list.index(month)
+            # increment the commit count
+            distribution[index]["commit_count"] += commit_count
+            distribution[index]["days"] += 1
+    return distribution
+def monthDistributionCurrentYear(username):
+    trends = getTrends(username)
+    months = {"01": "January", "02": "February", "03": "March", "04": "April", "05": "May", "06": "June", "07": "July", "08": "August", "09": "September", "10": "October", "11": "November", "12": "December"}
+    distribution = []
+    """
+    [
+        {
+            "month": "January",
+            "commit_count": 0,
+            "days": 0
+        }
+    ]
+    """
+    month_list = []
+    for trend in trends:
+        # get current year
+        current_year = datetime.date.today().strftime("%Y")
+
+        # make sure its the current year trend only
         if trend["date"].split("-")[0] != current_year:
             continue
         # get the month
@@ -313,33 +348,3 @@ def best_day(username):
     
     max_day = max(trends, key=lambda x: x["activity"])
     return max_day
-
-def commits_in_a_month(username):
-    year = input("Enter the year: ")
-    month = input("Enter the month: ")
-    url = "https://github.com/" + username + "?tab=overview&from=" + year + "-" + month + "-01" + "&to=" + year + "-" + month + "-31"
-
-    html = urlopen(url)
-    soup = BeautifulSoup(html, "html.parser")
-
-    open_commits = soup.find_all(class_="color-fg-default ws-normal text-left")[0].get_text()
-    open_commits = open_commits.split("\n")
-    open_commits = [x.strip() for x in open_commits][1]
-
-    private_commits = soup.find_all(class_="f4 lh-condensed m-0 color-fg-muted")[0].get_text()
-    private_commits = private_commits.split("\n")
-    private_commits = [x.strip() for x in private_commits][1]
-
-    print(username, open_commits, " commits in public repositories and", private_commits, " commits in private repositories")
-
-def commits_in_a_year(username):
-    year = input("Enter the year: ")
-    url = "https://github.com/" + username + "?tab=overview&from=" + year + "-12-01" + "&to=" + year + "-12-31"
-
-    html = urlopen(url)
-    soup = BeautifulSoup(html, "html.parser")
-
-    total_commits = soup.find_all(class_="f4 text-normal mb-2")[0].get_text()
-    total_commits = total_commits.split("\n")
-    total_commits = [x.strip() for x in total_commits][1]
-    print("Total commits in the year ",year,"by ", username, " are ", total_commits)
