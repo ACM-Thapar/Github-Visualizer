@@ -62,7 +62,8 @@ import avatar6 from 'src/assets/images/avatars/6.jpg'
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
-const Dashboard = () => {
+const Dashboard = ({data}) => {
+  console.log(data[2])
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
@@ -188,9 +189,22 @@ const Dashboard = () => {
     },
   ]
 
+  const previousYearArr = [0]
+  const currentYearArr = [0]
+
+  data && data[4] && data[4].map(month=>{
+    previousYearArr.push(month.commit_count)
+  })
+
+  data && data[5] && data[5].map(month=>{
+    currentYearArr.push(month.commit_count)
+  })
+
+  const currentYearArr2 = currentYearArr.slice(1)
+
   return (
     <>
-      <WidgetsDropdown />
+      <WidgetsDropdown data={data}/>
       <CCard className="mb-4">
         <CCardBody>
           <CRow>
@@ -201,10 +215,10 @@ const Dashboard = () => {
               <div className="small text-medium-emphasis">2021 & 2022</div>
             </CCol>
             <CCol sm={7} className="d-none d-md-block">
-              <CButton color="primary" className="float-end">
+              {/* <CButton color="primary" className="float-end">
                 <CIcon icon={cilCloudDownload} />
-              </CButton>
-              <CButtonGroup className="float-end me-3">
+              </CButton> */}
+              {/* <CButtonGroup className="float-end me-3">
                 {['Day', 'Month', 'Year'].map((value) => (
                   <CButton
                     color="outline-secondary"
@@ -215,68 +229,40 @@ const Dashboard = () => {
                     {value}
                   </CButton>
                 ))}
-              </CButtonGroup>
+              </CButtonGroup> */}
             </CCol>
           </CRow>
           <CChartLine
             style={{ height: '300px', marginTop: '40px' }}
             data={{
-              labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September','October','November', 'December'],
+              labels: ['Start','January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September','October','November', 'December'],
               datasets: [
                 {
-                  label: 'My First dataset',
+                  label: 'Current Year',
                   backgroundColor: hexToRgba(getStyle('--cui-info'), 10),
                   borderColor: getStyle('--cui-info'),
                   pointHoverBackgroundColor: getStyle('--cui-info'),
                   borderWidth: 2,
-                  data: [
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                  ],
+                  data: currentYearArr,
                   fill: true,
                 },
                 {
-                  label: 'My Second dataset',
+                  label: 'Previous Year',
                   backgroundColor: 'transparent',
                   borderColor: getStyle('--cui-success'),
                   pointHoverBackgroundColor: getStyle('--cui-success'),
                   borderWidth: 2,
-                  data: [
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                  ],
+                  data: previousYearArr,
                 },
-                {
-                  label: 'My Third dataset',
-                  backgroundColor: 'transparent',
-                  borderColor: getStyle('--cui-danger'),
-                  pointHoverBackgroundColor: getStyle('--cui-danger'),
-                  borderWidth: 1,
-                  borderDash: [8, 5],
-                  data: [65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65],
-                },
+                // {
+                //   label: 'My Third dataset',
+                //   backgroundColor: 'transparent',
+                //   borderColor: getStyle('--cui-danger'),
+                //   pointHoverBackgroundColor: getStyle('--cui-danger'),
+                //   borderWidth: 1,
+                //   borderDash: [8, 5],
+                //   data: [65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65],
+                // },
               ],
             }}
             options={{
@@ -337,18 +323,18 @@ const Dashboard = () => {
           content="React wrapper component for Chart.js 3.0, the most popular charting library."
         /> */}
       </CCol>
-      <CCol xs={6}>
+      <CCol xs={12}>
         <CCard className="mb-4">
-          <CCardHeader>Bar Chart</CCardHeader>
+          {/* <CCardHeader>Bar Chart</CCardHeader> */}
           <CCardBody>
             <CChartBar
               data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September','October','November', 'December'],
                 datasets: [
                   {
-                    label: 'GitHub Commits',
+                    label: 'GitHub Contributions',
                     backgroundColor: '#f87979',
-                    data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
+                    data: currentYearArr2,
                   },
                 ],
               }}

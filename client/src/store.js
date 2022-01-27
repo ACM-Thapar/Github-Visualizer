@@ -18,12 +18,10 @@ const changeState = (state = initialState, { type, ...rest }) => {
 }
 
 const rootReducer = () =>{
-  combineReducers({
-    changeState
-  })
+  combineReducers()
 }
 
-const store = createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+const store = createStore(changeState, initialState, composeWithDevTools(applyMiddleware(...middleware)))
 export default store
 
 
