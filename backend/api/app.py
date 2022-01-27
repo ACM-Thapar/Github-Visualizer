@@ -11,6 +11,7 @@ def index():
     return "Welcome to the Github Visualizer"
 
 @app.route("/<username>/")
+@cross_origin()
 def user(username):
     # return json with details
     if check_if_org(username):
@@ -121,6 +122,4 @@ def trends_bestday(username):
         return {"message": "username not found"}
 if __name__ == "__main__":
     app.run(debug=True)
-@cross_origin()
-def helloWorld():
-  return "Hello, cross-origin-world!"
+
