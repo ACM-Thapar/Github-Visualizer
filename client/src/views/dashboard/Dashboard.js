@@ -29,6 +29,7 @@ import {
 // import { CChartLine } from '@coreui/react-chartjs'
 import { getStyle, hexToRgba } from '@coreui/utils'
 import CIcon from '@coreui/icons-react'
+import { CChart } from '@coreui/react-chartjs'
 import {
   cibCcAmex,
   cibCcApplePay,
@@ -191,6 +192,7 @@ const Dashboard = ({data}) => {
 
   const previousYearArr = [0]
   const currentYearArr = [0]
+  const scatterArr = []
 
   data && data[4] && data[4].map(month=>{
     previousYearArr.push(month.commit_count)
@@ -201,6 +203,14 @@ const Dashboard = ({data}) => {
   })
 
   const currentYearArr2 = currentYearArr.slice(1)
+
+  data && data[1] && data[1].map(cont=>{
+    let obj = {
+      x:  cont.activity,
+      y: (cont.date)
+    }
+    scatterArr.push(obj)
+  })
 
   return (
     <>
@@ -340,6 +350,43 @@ const Dashboard = ({data}) => {
               }}
               labels="months"
             />
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol xs={12}>
+        <CCard className="mb-4">
+          {/* <CCardHeader>Bar Chart</CCardHeader> */}
+          <CCardBody>
+          <CChart
+            type="scatter"
+            data={{
+              datasets: [{
+                label: 'Scatter Dataset',
+                data: [{
+                  x: -10,
+                  y: '0'
+                }, {
+                  x: 0,
+                  y: '10'
+                }, {
+                  x: 10,
+                  y: '5'
+                }, {
+                  x: 0.5,
+                  y: '5.5'
+                }],
+                backgroundColor: 'rgb(255, 99, 132)'
+              }],
+            }}
+            options={{
+              scales: {
+                x: {
+                  type: 'linear',
+                  position: 'bottom'
+                }
+              }
+            }}
+          />
           </CCardBody>
         </CCard>
       </CCol>

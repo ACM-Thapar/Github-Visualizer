@@ -24,7 +24,7 @@ const App = () => {
   useEffect(async()=>{
     
     
-    const res = await axios.get('https://bb5d-223-178-208-32.ngrok.io/Samikmalhotra/')
+    const res = await axios.get('https://github-visualiser-acm.herokuapp.com/Samikmalhotra/')
     console.log(res.data)
     setData(res.data)
   },[])
