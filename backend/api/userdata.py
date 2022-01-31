@@ -1,3 +1,6 @@
+# %%
+from cgitb import text
+from webbrowser import get
 import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
@@ -348,3 +351,36 @@ def best_day(username):
     
     max_day = max(trends, key=lambda x: x["activity"])
     return max_day
+
+# %%
+def scrapy_scrapy(username):
+    url = "https://github-readme-stats.vercel.app/api?username="+username+"&show_icons=true&theme=react&count_private=true&include_all_commits=true%27"
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+    data = {}
+    for link in soup.find_all("text",x='175'):
+        data[link.get('data-testid')] = link.text
+
+    return data
+
+scrapy_scrapy("Samikmalhotra")
+# %%
+def scrapy_scrapy2(username):
+    url = "https://github-readme-streak-stats.herokuapp.com/?user="+username+"&theme=black-ice"
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+    data = {}
+    con = soup.find("text", style="font-family:Segoe UI, Ubuntu, sans-serif;font-weight:700;font-size:28px;font-style:normal;fill:#fff;stroke:none; opacity: 0; animation: fadein 0.5s linear forwards 0.6s;")
+
+    curr_streak = soup.find("text", style="font-family:Segoe UI, Ubuntu, sans-serif;font-weight:700;font-size:28px;font-style:normal;fill:#fff;stroke:none;animation: currstreak 0.6s linear forwards;")
+
+    max_streak = soup.find("text", style="font-family:Segoe UI, Ubuntu, sans-serif;font-weight:700;font-size:28px;font-style:normal;fill:#fff;stroke:none; opacity: 0; animation: fadein 0.5s linear forwards 1.2s;")
+
+    data["contributions"] = con.text
+    data["current_streak"] = curr_streak.text
+    data["max_streak"] = max_streak.text
+
+
+scrapy_scrapy2("Samikmalhotra")
+
+# %%

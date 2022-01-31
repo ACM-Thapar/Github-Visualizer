@@ -26,9 +26,11 @@ def user(username):
         current_months=monthDistributionCurrentYear(username)
         fav_day= fave_day(username)
         bestday= best_day(username)
+        stats = scrapy_scrapy(username)
+        stats2 = scrapy_scrapy2(username)
 
 
-        return jsonify(data, trends, streak, gap, months, current_months, fav_day, bestday)
+        return jsonify(data, trends, streak, gap, months, current_months, fav_day, bestday, stats, stats2)
     except:
         return {"message": "username not found"}
     
