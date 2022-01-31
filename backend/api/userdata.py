@@ -1,4 +1,4 @@
-# %%
+
 from cgitb import text
 from webbrowser import get
 import requests
@@ -352,7 +352,7 @@ def best_day(username):
     max_day = max(trends, key=lambda x: x["activity"])
     return max_day
 
-# %%
+
 def scrapy_scrapy(username):
     url = "https://github-readme-stats.vercel.app/api?username="+username+"&show_icons=true&theme=react&count_private=true&include_all_commits=true%27"
     html = urlopen(url)
@@ -364,7 +364,7 @@ def scrapy_scrapy(username):
     return data
 
 scrapy_scrapy("Samikmalhotra")
-# %%
+
 def scrapy_scrapy2(username):
     url = "https://github-readme-streak-stats.herokuapp.com/?user="+username+"&theme=black-ice"
     html = urlopen(url)
@@ -383,4 +383,3 @@ def scrapy_scrapy2(username):
 
 scrapy_scrapy2("Samikmalhotra")
 
-# %%
