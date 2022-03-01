@@ -23,7 +23,3 @@
 //     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
 //   },
 // }
-
-module.exports = {
-  parser: 'babel-eslint',
-}
