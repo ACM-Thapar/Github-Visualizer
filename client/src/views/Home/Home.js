@@ -1,45 +1,34 @@
 import React from 'react'
-import * as styles from './Home.styles.js'
-import { CForm, CFormLabel, CFormInput, CFormText, CContainer, CRow, CCol } from '@coreui/react'
-import '@coreui/coreui/dist/css/coreui.min.css'
+import './Home.css'
+import welcome from '../../assets/images/welcome.svg'
 
 function Home() {
   return (
-    <CContainer fluid>
-      <CRow className="align-items-start">
-        <CCol></CCol>
-        <CCol className="bg-light">
-          <h1>Github Visualizer - ACM</h1>
-          <h4>Someones keeping an eye on you</h4>
-        </CCol>
-        <CCol></CCol>
-      </CRow>
-      <CRow className="align-items-center">
-        <CCol></CCol>
-        <CCol className="bg-light">
-          <CForm>
-            <div className="mb-3">
-              <CFormLabel htmlFor="inputPassword5">Password</CFormLabel>
-              <CFormInput
-                type="password"
-                id="inputPassword5"
-                aria-describedby="passwordHelpBlock"
-              />
-              <CFormText id="passwordHelpBlock">
-                Your password must be 8-20 characters long, contain letters and numbers, and must
-                not contain spaces, special characters, or emoji.
-              </CFormText>
+    <>
+      <div className="wrapper">
+        <div className="home">
+          <div className="text">
+            <div className="content">
+              <h2 className="text_shadows">Github</h2>
+              {/* <h2 className="text_shadows">- </h2> */}
+              <h2 className="text_shadows">Visualizer</h2>
             </div>
-          </CForm>
-        </CCol>
-        <CCol></CCol>
-      </CRow>
-      <CRow className="align-items-end">
-        <CCol></CCol>
-        <CCol className="bg-light">One of three columns</CCol>
-        <CCol></CCol>
-      </CRow>
-    </CContainer>
+            <div className="webflow-style-input">
+              <input className="" type="email" placeholder="Enter your Github Username"></input>
+              <button type="submit">
+                <i className="icon ion-android-arrow-forward"></i>
+              </button>
+            </div>
+          </div>
+          <div className="img">
+            <img src={welcome} alt="" />
+          </div>
+        </div>
+        <div className="footer">
+          Made with ❤️ by <a href="https://github.com/ACM-Thapar">{'   '}@ACM-Thapar</a>
+        </div>
+      </div>
+    </>
   )
 }
 
