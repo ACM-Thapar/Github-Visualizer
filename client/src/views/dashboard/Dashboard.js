@@ -53,12 +53,14 @@ import {
   cilUserFemale,
 } from '@coreui/icons'
 
-import avatar1 from 'src/assets/images/avatars/1.jpg'
-import avatar2 from 'src/assets/images/avatars/2.jpg'
-import avatar3 from 'src/assets/images/avatars/3.jpg'
-import avatar4 from 'src/assets/images/avatars/4.jpg'
-import avatar5 from 'src/assets/images/avatars/5.jpg'
-import avatar6 from 'src/assets/images/avatars/6.jpg'
+// import avatar1 from 'src/assets/images/avatars/1.jpg'
+// import avatar2 from 'src/assets/images/avatars/2.jpg'
+// import avatar3 from 'src/assets/images/avatars/3.jpg'
+// import avatar4 from 'src/assets/images/avatars/4.jpg'
+// import avatar5 from 'src/assets/images/avatars/5.jpg'
+// import avatar6 from 'src/assets/images/avatars/6.jpg'
+
+// impor/t CalendarHeatmap from 'reactjs-calendar-heatmap'
 
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
@@ -99,96 +101,96 @@ const Dashboard = ({data}) => {
     { title: 'LinkedIn', icon: cibLinkedin, percent: 8, value: '27,319' },
   ]
 
-  const tableExample = [
-    {
-      avatar: { src: avatar1, status: 'success' },
-      user: {
-        name: 'Yiorgos Avraamu',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'USA', flag: cifUs },
-      usage: {
-        value: 50,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Mastercard', icon: cibCcMastercard },
-      activity: '10 sec ago',
-    },
-    {
-      avatar: { src: avatar2, status: 'danger' },
-      user: {
-        name: 'Avram Tarasios',
-        new: false,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Brazil', flag: cifBr },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'info',
-      },
-      payment: { name: 'Visa', icon: cibCcVisa },
-      activity: '5 minutes ago',
-    },
-    {
-      avatar: { src: avatar3, status: 'warning' },
-      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'India', flag: cifIn },
-      usage: {
-        value: 74,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'warning',
-      },
-      payment: { name: 'Stripe', icon: cibCcStripe },
-      activity: '1 hour ago',
-    },
-    {
-      avatar: { src: avatar4, status: 'secondary' },
-      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'France', flag: cifFr },
-      usage: {
-        value: 98,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'danger',
-      },
-      payment: { name: 'PayPal', icon: cibCcPaypal },
-      activity: 'Last month',
-    },
-    {
-      avatar: { src: avatar5, status: 'success' },
-      user: {
-        name: 'Agapetus Tadeáš',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Spain', flag: cifEs },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'primary',
-      },
-      payment: { name: 'Google Wallet', icon: cibCcApplePay },
-      activity: 'Last week',
-    },
-    {
-      avatar: { src: avatar6, status: 'danger' },
-      user: {
-        name: 'Friderik Dávid',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Poland', flag: cifPl },
-      usage: {
-        value: 43,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Amex', icon: cibCcAmex },
-      activity: 'Last week',
-    },
-  ]
+  // const tableExample = [
+  //   {
+  //     avatar: { src: avatar1, status: 'success' },
+  //     user: {
+  //       name: 'Yiorgos Avraamu',
+  //       new: true,
+  //       registered: 'Jan 1, 2021',
+  //     },
+  //     country: { name: 'USA', flag: cifUs },
+  //     usage: {
+  //       value: 50,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'success',
+  //     },
+  //     payment: { name: 'Mastercard', icon: cibCcMastercard },
+  //     activity: '10 sec ago',
+  //   },
+  //   {
+  //     avatar: { src: avatar2, status: 'danger' },
+  //     user: {
+  //       name: 'Avram Tarasios',
+  //       new: false,
+  //       registered: 'Jan 1, 2021',
+  //     },
+  //     country: { name: 'Brazil', flag: cifBr },
+  //     usage: {
+  //       value: 22,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'info',
+  //     },
+  //     payment: { name: 'Visa', icon: cibCcVisa },
+  //     activity: '5 minutes ago',
+  //   },
+  //   {
+  //     avatar: { src: avatar3, status: 'warning' },
+  //     user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
+  //     country: { name: 'India', flag: cifIn },
+  //     usage: {
+  //       value: 74,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'warning',
+  //     },
+  //     payment: { name: 'Stripe', icon: cibCcStripe },
+  //     activity: '1 hour ago',
+  //   },
+  //   {
+  //     avatar: { src: avatar4, status: 'secondary' },
+  //     user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
+  //     country: { name: 'France', flag: cifFr },
+  //     usage: {
+  //       value: 98,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'danger',
+  //     },
+  //     payment: { name: 'PayPal', icon: cibCcPaypal },
+  //     activity: 'Last month',
+  //   },
+  //   {
+  //     avatar: { src: avatar5, status: 'success' },
+  //     user: {
+  //       name: 'Agapetus Tadeáš',
+  //       new: true,
+  //       registered: 'Jan 1, 2021',
+  //     },
+  //     country: { name: 'Spain', flag: cifEs },
+  //     usage: {
+  //       value: 22,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'primary',
+  //     },
+  //     payment: { name: 'Google Wallet', icon: cibCcApplePay },
+  //     activity: 'Last week',
+  //   },
+  //   {
+  //     avatar: { src: avatar6, status: 'danger' },
+  //     user: {
+  //       name: 'Friderik Dávid',
+  //       new: true,
+  //       registered: 'Jan 1, 2021',
+  //     },
+  //     country: { name: 'Poland', flag: cifPl },
+  //     usage: {
+  //       value: 43,
+  //       period: 'Jun 11, 2021 - Jul 10, 2021',
+  //       color: 'success',
+  //     },
+  //     payment: { name: 'Amex', icon: cibCcAmex },
+  //     activity: 'Last week',
+  //   },
+  // ]
 
   const previousYearArr = [0]
   const currentYearArr = [0]
@@ -311,7 +313,7 @@ const Dashboard = ({data}) => {
             }}
           />
         </CCardBody>
-        <CCardFooter>
+        {/* <CCardFooter>
           <CRow xs={{ cols: 1 }} md={{ cols: 5 }} className="text-center">
             {progressExample.map((item, index) => (
               <CCol className="mb-sm-2 mb-0" key={index}>
@@ -323,7 +325,7 @@ const Dashboard = ({data}) => {
               </CCol>
             ))}
           </CRow>
-        </CCardFooter>
+        </CCardFooter> */}
       </CCard>
       <CRow>
       <CCol xs={12}>
@@ -353,9 +355,12 @@ const Dashboard = ({data}) => {
           </CCardBody>
         </CCard>
       </CCol>
-      <CCol xs={12}>
+      <CCol xs={12} style={{textAlign: 'center'}}>
+        <img src={'https://github-profile-trophy.vercel.app/?username=Samikmalhotra&row=1&column=7&margin-w=15e'} style={{margin: 'auto'}}/>
+      </CCol>
+      {/* <CCol xs={12}>
         <CCard className="mb-4">
-          {/* <CCardHeader>Bar Chart</CCardHeader> */}
+          <CCardHeader>Bar Chart</CCardHeader>
           <CCardBody>
           <CChart
             type="scatter"
@@ -389,8 +394,8 @@ const Dashboard = ({data}) => {
           />
           </CCardBody>
         </CCard>
-      </CCol>
-      <CCol xs={6}>
+      </CCol> */}
+      {/* <CCol xs={6}>
         <CCard className="mb-4">
           <CCardHeader>Line Chart</CCardHeader>
           <CCardBody>
@@ -419,8 +424,8 @@ const Dashboard = ({data}) => {
             />
           </CCardBody>
         </CCard>
-      </CCol>
-      <CCol xs={6}>
+      </CCol> */}
+      {/* <CCol xs={6}>
         <CCard className="mb-4">
           <CCardHeader>Doughnut Chart</CCardHeader>
           <CCardBody>
@@ -437,8 +442,8 @@ const Dashboard = ({data}) => {
             />
           </CCardBody>
         </CCard>
-      </CCol>
-      <CCol xs={6}>
+      </CCol> */}
+      {/* <CCol xs={6}>
         <CCard className="mb-4">
           <CCardHeader>Pie Chart</CCardHeader>
           <CCardBody>
@@ -456,8 +461,8 @@ const Dashboard = ({data}) => {
             />
           </CCardBody>
         </CCard>
-      </CCol>
-      <CCol xs={6}>
+      </CCol> */}
+      {/* <CCol xs={6}>
         <CCard className="mb-4">
           <CCardHeader>Polar Area Chart</CCardHeader>
           <CCardBody>
@@ -474,21 +479,19 @@ const Dashboard = ({data}) => {
             />
           </CCardBody>
         </CCard>
-      </CCol>
-      <CCol xs={6}>
+      </CCol> */}
+      {/* <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>Radar Chart</CCardHeader>
           <CCardBody>
             <CChartRadar
               data={{
                 labels: [
-                  'Eating',
-                  'Drinking',
-                  'Sleeping',
-                  'Designing',
-                  'Coding',
-                  'Cycling',
-                  'Running',
+                  'Commits',
+                  'PRs',
+                  'Code Reviews',
+                  'Issues',
+                 
                 ],
                 datasets: [
                   {
@@ -499,7 +502,7 @@ const Dashboard = ({data}) => {
                     pointBorderColor: '#fff',
                     pointHighlightFill: '#fff',
                     pointHighlightStroke: 'rgba(220, 220, 220, 1)',
-                    data: [65, 59, 90, 81, 56, 55, 40],
+                    data: [65, 59, 90, 81],
                   },
                   {
                     label: 'My Second dataset',
@@ -509,19 +512,19 @@ const Dashboard = ({data}) => {
                     pointBorderColor: '#fff',
                     pointHighlightFill: '#fff',
                     pointHighlightStroke: 'rgba(151, 187, 205, 1)',
-                    data: [28, 48, 40, 19, 96, 27, 100],
+                    data: [28, 48, 40, 19],
                   },
                 ],
               }}
             />
           </CCardBody>
         </CCard>
-      </CCol>
+      </CCol> */}
     </CRow>
 
-      <WidgetsBrand withCharts />
+      {/* <WidgetsBrand withCharts /> */}
 
-      <CRow>
+      {/* <CRow>
         <CCol xs>
           <CCard className="mb-4">
             <CCardHeader>Traffic {' & '} Sales</CCardHeader>
@@ -664,7 +667,7 @@ const Dashboard = ({data}) => {
             </CCardBody>
           </CCard>
         </CCol>
-      </CRow>
+      </CRow> */}
     </>
   )
 }

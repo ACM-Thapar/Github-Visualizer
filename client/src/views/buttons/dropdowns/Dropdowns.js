@@ -13,7 +13,7 @@ import {
   CDropdownToggle,
   CRow,
 } from '@coreui/react'
-import { DocsCallout, DocsExample } from 'src/components'
+import { DocsCallout, DocsExample } from '../../../components'
 
 const Dropdowns = () => {
   return (

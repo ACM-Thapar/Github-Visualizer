@@ -1,6 +1,6 @@
 import React from 'react'
 import { CButton, CCard, CCardBody, CCardHeader, CCol, CContainer, CRow } from '@coreui/react'
-import { DocsLink } from 'src/components'
+import { DocsLink } from '../../../components'
 
 const Jumbotrons = () => {
   return (

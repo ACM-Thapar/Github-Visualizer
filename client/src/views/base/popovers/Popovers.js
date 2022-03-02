@@ -1,6 +1,6 @@
 import React from 'react'
 import { CButton, CCard, CCardBody, CCardHeader, CPopover, CRow, CCol } from '@coreui/react'
-import { DocsCallout, DocsExample } from 'src/components'
+// import { DocsCallout, DocsExample } from '../../../components'
 
 const Popovers = () => {
   return (

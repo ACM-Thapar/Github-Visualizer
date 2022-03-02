@@ -12,7 +12,7 @@ import {
   CToastHeader,
   CToaster,
 } from '@coreui/react'
-import { DocsCallout, DocsExample } from 'src/components'
+import { DocsCallout, DocsExample } from '../../../components'
 
 const ExampleToast = () => {
   const [toast, addToast] = useState(0)
