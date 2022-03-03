@@ -27,7 +27,7 @@ const AppContent = ({data}) => {
               )
             )
           })}
-          <Redirect from="/" to="/landing" />
+          <Redirect from="/" to="/home" />
         </Switch>
       </Suspense>
     </CContainer>

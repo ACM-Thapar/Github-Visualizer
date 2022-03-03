@@ -1,8 +1,10 @@
 import React from 'react'
 import './Home.css'
 import welcome from './images/welcome.svg'
+import { useHistory } from 'react-router-dom'
 
-function Home() {
+function Home(props) {
+  const history = useHistory()
   return (
     <>
       <div className="home_wrapper">
@@ -14,14 +16,24 @@ function Home() {
               <h2 className="text_shadows">Visualizer</h2>
             </div>
             <div className="webflow-style-input">
-              <input
-                className="home_input"
-                type="email"
-                placeholder="Enter your Github Username"
-              ></input>
-              <button type="submit">
-                <i className="icon ion-android-arrow-forward"></i>
-              </button>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  props.submitUsername(history)
+                }}
+              >
+                <input
+                  className="home_input"
+                  type="text"
+                  placeholder="Enter your Github Username"
+                  onChange={(e) => {
+                    props.setUsername(e.target.value)
+                  }}
+                ></input>
+                <button type="submit">
+                  <i className="icon ion-android-arrow-forward"></i>
+                </button>
+              </form>
             </div>
           </div>
           <div className="img">
