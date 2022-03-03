@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from 'react'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 import './scss/style.scss'
+import Home from './views/Home/Home'
 import axios from 'axios'
 
 const loading = (
@@ -21,19 +22,18 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 const App = () => {
   const [data, setData] = useState([])
 
-  useEffect(async()=>{
-    
-    
+  useEffect(async () => {
     const res = await axios.get('https://github-visualiser-acm.herokuapp.com/Samikmalhotra/')
     console.log(res.data)
     setData(res.data)
-  },[])
+  }, [])
   console.log(data)
 
   return (
     <HashRouter>
       <React.Suspense fallback={loading}>
         <Switch>
+          <Route exact path="/home_new" name="Home Page" render={() => <Home />} />
           <Route exact path="/login" name="Login Page" render={(props) => <Login {...props} />} />
           <Route
             exact
@@ -43,7 +43,11 @@ const App = () => {
           />
           <Route exact path="/404" name="Page 404" render={(props) => <Page404 {...props} />} />
           <Route exact path="/500" name="Page 500" render={(props) => <Page500 {...props} />} />
-          <Route path="/" name="Home" render={(props) => <DefaultLayout {...props} data={data} />} />
+          <Route
+            path="/"
+            name="Home"
+            render={(props) => <DefaultLayout {...props} data={data} />}
+          />
         </Switch>
       </React.Suspense>
     </HashRouter>
