@@ -22,6 +22,7 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 const App = () => {
   const [username, setUsername] = useState(null)
   const [data, setData] = useState([])
+  const [mainLoading, setMainLoading] = useState(false)
 
   // useEffect(async () => {
   //   if (username !== null) {
@@ -31,13 +32,18 @@ const App = () => {
   //   }
   // }, [])
   const submitUsername = async(history) => {
-    
+    localStorage.setItem('username', username)
+    setMainLoading(true)
     try {
       const res = await axios.get(`https://github-visualiser-acm.herokuapp.com/${username}/`)
       setData(res.data)
+      const mainData = JSON.stringify(res.data)
+      localStorage.setItem('data', mainData)
+      setMainLoading(false)
       history.push('/dashboard')
     } catch (error) {
       console.error(error.message)
+      setMainLoading(false)
     }
   }
   console.log(username)
@@ -54,7 +60,7 @@ const App = () => {
             exact
             path="/home"
             name="Home Page"
-            render={() => <Home setUsername={setUsername} submitUsername={submitUsername}/>}
+            render={() => <Home setUsername={setUsername} submitUsername={submitUsername} mainLoading={mainLoading}/>}
           />
           <Route exact path="/login" name="Login Page" render={(props) => <Login {...props} />} />
           <Route

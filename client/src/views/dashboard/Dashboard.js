@@ -356,7 +356,7 @@ const Dashboard = ({data}) => {
         </CCard>
       </CCol>
       <CCol xs={12} style={{textAlign: 'center'}}>
-        <img src={'https://github-profile-trophy.vercel.app/?username=Samikmalhotra&row=1&column=7&margin-w=15e'} style={{margin: 'auto'}}/>
+        <img src={`https://github-profile-trophy.vercel.app/?username=${data[0] && data[0].username}&row=1&column=7&margin-w=15e`} style={{margin: 'auto'}}/>
       </CCol>
       {/* <CCol xs={12}>
         <CCard className="mb-4">
