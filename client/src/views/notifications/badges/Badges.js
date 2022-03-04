@@ -1,6 +1,6 @@
 import React from 'react'
 import { CButton, CCard, CCardBody, CCardHeader, CCol, CBadge, CRow } from '@coreui/react'
-import { DocsCallout, DocsExample } from 'src/components'
+import { DocsCallout, DocsExample } from '../../../components'
 
 const Badges = () => {
   return (

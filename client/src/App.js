@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom'
 import './scss/style.scss'
 import Home from './views/Home/Home'
 import axios from 'axios'
@@ -20,20 +20,48 @@ const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
 const App = () => {
+  const [username, setUsername] = useState(null)
   const [data, setData] = useState([])
+  const [mainLoading, setMainLoading] = useState(false)
 
-  useEffect(async () => {
-    const res = await axios.get('https://github-visualiser-acm.herokuapp.com/Samikmalhotra/')
-    console.log(res.data)
-    setData(res.data)
-  }, [])
+  // useEffect(async () => {
+  //   if (username !== null) {
+  //     const res = await axios.get('https://github-visualiser-acm.herokuapp.com/Samikmalhotra/')
+  //     console.log(res.data)
+  //     setData(res.data)
+  //   }
+  // }, [])
+  const submitUsername = async(history) => {
+    localStorage.setItem('username', username)
+    setMainLoading(true)
+    try {
+      const res = await axios.get(`https://github-visualiser-acm.herokuapp.com/${username}/`)
+      setData(res.data)
+      const mainData = JSON.stringify(res.data)
+      localStorage.setItem('data', mainData)
+      setMainLoading(false)
+      history.push('/dashboard')
+    } catch (error) {
+      console.error(error.message)
+      setMainLoading(false)
+    }
+  }
+  console.log(username)
   console.log(data)
+  if(data !== []){
+    <Redirect to = '/dashboard'></Redirect>
+  }
 
   return (
     <HashRouter>
       <React.Suspense fallback={loading}>
         <Switch>
-          <Route exact path="/home_new" name="Home Page" render={() => <Home />} />
+          <Route
+            exact
+            path="/home"
+            name="Home Page"
+            render={() => <Home setUsername={setUsername} submitUsername={submitUsername} mainLoading={mainLoading}/>}
+          />
           <Route exact path="/login" name="Login Page" render={(props) => <Login {...props} />} />
           <Route
             exact

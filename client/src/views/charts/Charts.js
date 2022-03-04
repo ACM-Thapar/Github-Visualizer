@@ -8,7 +8,7 @@ import {
   CChartPolarArea,
   CChartRadar,
 } from '@coreui/react-chartjs'
-import { DocsCallout } from 'src/components'
+import { DocsCallout } from '../../components'
 
 const Charts = () => {
   const random = () => Math.round(Math.random() * 100)
